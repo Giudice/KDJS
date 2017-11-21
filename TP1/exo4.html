@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body></body>
+
+<script type="text/javascript">
+var Personne = {
+nom:"",
+prenom:"",
+dateDeNaissance: ["","",""],
+taille:"",
+init: function (nom, prenom, dateDeNaissance, taille){
+  this.nom=nom;
+  this.prenom=prenom;
+  this.dateDeNaissance=dateDeNaissance;
+  this.taille=taille;
+},
+	  decrire: function(){
+    console.log("Je m'appelle "+this.prenom+" "+ this.nom+" et je suis nee le "+this.dateDeNaissance+". Je mesure "+this.taille+". Mon adresse mail est "+this.adresseMail+".")
+	  },
+	direAge: function(){
+		var dateJ=new Date();// Le date d'ouverture de la page (aujourd'hui)
+		var year=parseInt(this.dateDeNaissance[2]); // On récupère l'année (3eme élément du tableau)
+		var age=dateJ.getFullYear()-year; // On calcule l'age
+		console.log("J'ai donc "+age+" ans.");				
+	}
+
+};
+
+var Professeur=Object.create(Personne);
+Professeur.adresseMail=0;
+Professeur.initProfesseur=function(nom, prenom, dateDeNaissance, taille, adresseMail){
+  this.init(nom,prenom,dateDeNaissance,taille);
+  this.adresseMail=adresseMail;
+}
+Professeur.decrireProfesseur=function(){
+	this.decrire();
+}
+	
+var prof1=Object.create(Professeur);
+prof1.initProfesseur("Denis","Mora",[16,8,1952],"1m80","denis.mora@gmail.com");
+prof1.decrireProfesseur();
+prof1.direAge();
+
+var prof2=Object.create(Professeur);
+prof2.initProfesseur("Henry","Lafont",[24,12,1963],"1m75","denis.mora@gmail.com");
+prof2.decrireProfesseur();
+prof2.direAge();
+
+</script>

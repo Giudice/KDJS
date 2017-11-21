@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body></body>
+
+<script type="text/javascript">
+var Personne = {
+nom:"",
+prenom:"",
+dateDeNaissance: ["","",""],
+init: function (nom, prenom, dateDeNaissance){
+  this.nom=nom;
+  this.prenom=prenom;
+  this.dateDeNaissance=dateDeNaissance;
+},
+	  decrire: function(){
+    console.log("Je m'appelle "+this.prenom+" "+ this.nom+" et je suis nee le "+this.dateDeNaissance+". Mon adresse mail est "+this.adresseMail+".")}
+
+};
+
+var Professeur=Object.create(Personne);
+Professeur.adresseMail=0;
+Professeur.initProfesseur=function(nom, prenom, dateDeNaissance, adresseMail){
+  this.init(nom,prenom,dateDeNaissance);
+  this.adresseMail=adresseMail;
+}
+Professeur.decrireProfesseur=function(){
+	this.decrire();
+}
+	
+var prof1=Object.create(Professeur);
+prof1.initProfesseur("Denis","Mora",[16,8,1952],"denis.mora@gmail.com");
+prof1.decrireProfesseur();
+
+var prof2=Object.create(Professeur);
+prof2.initProfesseur("Henry","Lafont",[24,12,1963],"denis.mora@gmail.com");
+prof2.decrireProfesseur();
+
+</script>
