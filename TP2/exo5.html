@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Kit de Survie JS</title>
+    <meta name="description" content="">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+    	body{ font-family: 'Quicksand', sans-serif; }
+
+
+	</style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+         $("#formulaire").submit(function() {
+           var n=$('#texte').val();
+           var option=$("#type > option:selected").val();
+				switch(option){
+					case "nom":
+          $.ajax({
+             url: "https://geo.api.gouv.fr/communes?nom="+n,
+              dataType: "json",
+              beforeSend: function(){
+                console.log('Envoi de la requete ...');
+              },
+              complete: function(data){
+                console.log('Reponse recue');
+                console.log(data);
+                data.responseJSON.forEach(function(e){
+                  $("#table").append("<li> Nom : "+e.nom+"</li>");
+                  $("#table").append("<li> Code départemental : "+e.codeDepartement+"</li>");
+                  $("#table").append("<li> Code Région : "+e.codeRegion+"</li>");
+                  $("#table").append("<li> Code Postale : "+e.codesPostaux+"</li>");
+                  $("#table").append("<li> Population : "+e.population+"</li><br>");
+                });
+              },
+              method: "GET"
+             });
+             $("#formulaire").submit(function() {
+                });
+						break;
+					case "CP":
+          $.ajax({
+             url: "https://geo.api.gouv.fr/communes?codePostal="+n,
+              dataType: "json",
+              beforeSend: function(){
+                console.log('Envoi de la requete ...');
+              },
+              complete: function(data){
+                console.log('Reponse recue');
+                console.log(data);
+                data.responseJSON.forEach(function(e){
+                  $("#table").append("<li> Nom : "+e.nom+"</li>");
+                  $("#table").append("<li> Code départemental : "+e.codeDepartement+"</li>");
+                  $("#table").append("<li> Code Région : "+e.codeRegion+"</li>");
+                  $("#table").append("<li> Code Postale : "+e.codesPostaux+"</li>");
+                  $("#table").append("<li> Population : "+e.population+"</li><br>");
+                });
+              },
+              method: "GET"
+             });
+             $("#formulaire").submit(function() {
+                });
+						break;
+					default:
+          $.ajax({
+             url: "https://geo.api.gouv.fr/communes?codeDepartement="+n,
+              dataType: "json",
+              beforeSend: function(){
+                console.log('Envoi de la requete ...');
+              },
+              complete: function(data){
+                console.log('Reponse recue');
+                console.log(data);
+                data.responseJSON.forEach(function(e){
+                  $("#table").append("<li> Nom : "+e.nom+"</li>");
+                  $("#table").append("<li> Code départemental : "+e.codeDepartement+"</li>");
+                  $("#table").append("<li> Code Région : "+e.codeRegion+"</li>");
+                  $("#table").append("<li> Code Postale : "+e.codesPostaux+"</li>");
+                  $("#table").append("<li> Population : "+e.population+"</li><br>");
+                });
+              },
+              method: "GET"
+             });
+				}
+          return false;
+			});
+    	});
+   	</script>
+</head>
+<body>
+  <body>
+        <div id="conteneur"></div>
+        <form method="GET" id="formulaire">
+          <select name="select" id="type">
+            <option value="nom">Nom</option>
+            <option value="CP">Code Postal</option>
+            <option value="CD">Code Départemental</option>
+          </select><br>
+          <input type="text" id="texte"/><br>
+          <input type="submit" value"Vérification" id="bouton"/>
+        </form>
+
+
+          <ul id="table"></ul>
+
+
+</body>
+</body>
+
+</html>
