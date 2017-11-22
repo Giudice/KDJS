@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+ <html>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+ </script>
+ <script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+  $http.get("https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/pokedex.json").then(function(response) {
+	  $scope.pokemons = response.data;
+	  console.log(response.data);
+  });
+});
+</script>
+ <body>
+	<div ng-app="myApp" ng-controller="myCtrl" >
+		<li ng-repeat="pokemon in pokemons">Europe : {{pokemon.ename}},	Chinois : {{pokemon.cname}}, Japonais : {{pokemon.jname}}  </li>
+	</div>
+ </body>
+</html>
